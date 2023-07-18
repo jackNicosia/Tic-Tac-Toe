@@ -86,4 +86,7 @@ playButton.addEventListener("click", showBoxArray);
 function showBoxArray(){
   const boxArrayElement = document.querySelector(".boxArray");
   boxArrayElement.style.display = "grid";
+
+  const introPage = document.querySelector(".intro-page");
+  introPage.style.display = "none";
 }
