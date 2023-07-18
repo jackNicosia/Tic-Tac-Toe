@@ -1,5 +1,37 @@
 body {
-    display:grid;
+    display: grid;
+    justify-content: center;
+    text-align: center;
+    background-image: url(imgs/wood.png);
+    background-size: 100%;
+}
+
+h1 {
+    margin-top: 10%;
+    color: rgb(29, 163, 11);
+    font-size: 12vh;
+    text-decoration: underline;
+    
+}
+
+#play {
+    color: blue;
+    width: 25vw; 
+    height: 10vh;
+    margin-top: 20%;
+    font-size: 5vh;
+    background-color: transparent;
+    border-radius: 100px;
+    font-weight: bold;
+    border: 5px solid blue;
+    justify-self: center;
+    cursor: pointer;
+}
+
+
+.boxArray {
+
+    display:none;
     grid-template-columns: repeat(3, 200px);
     grid-template-rows: repeat(3, 200px);
     justify-content: center;
@@ -11,6 +43,7 @@ body {
     width: 1fr;
     height: 1fr;
     background-color: aqua;
+    
 }
 
 #box1 {
@@ -35,6 +68,7 @@ body {
     width: 1fr;
     height: 1fr;
     background-color: rgb(105, 102, 102);
+    font-size: 200px;
 }
 
 #box5 {
