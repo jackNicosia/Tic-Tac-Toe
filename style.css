@@ -41,19 +41,60 @@ h1 {
 
 
 
-#box0 {
+.blue-box {
     width: 1fr;
     height: 1fr;
     background-color: rgb(30, 172, 208);
+    font-size: 18vh;
     
 }
 
-#box1 {
+.gray-box {
     width: 1fr;
     height: 1fr;
     background-color: rgb(98, 97, 97);
+    font-size: 18vh;
 }
 
+#reset-button {
+    font-size: 3vh;
+    width: 18vw;
+    height: 10vh;
+    color: blue;
+    cursor: pointer;
+    border: 5px solid blue;
+    background-color: transparent;
+    border-radius: 75px;
+    font-weight: bold;
+    margin-top: 10%;
+}
+
+
+.reset-button-container {
+    display:none;
+    position: absolute;
+    justify-self: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 #box2 {
     width: 1fr;
     height: 1fr;
