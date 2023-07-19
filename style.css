@@ -56,12 +56,8 @@ h1 {
     font-size: 18vh;
 }
 
-.player1-symbol .player-turn-message{
+.player1-symbol {
     color:white;
-}
-
-.player2-symbol .player-turn-message {
-    color:black;
 }
 
 #reset-button {
@@ -94,7 +90,6 @@ h1 {
     grid-row: 2;
     font-size: 25px;
     font-weight: bold;
-    color:white; 
    
 }
 
@@ -108,63 +103,4 @@ footer {
     font-size: 30px;
     text-decoration: underline;
     text-decoration-color: rgb(37, 253, 8);
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-#box2 {
-    width: 1fr;
-    height: 1fr;
-    background-color: rgb(30, 172, 208);
-}
-
-#box3 {
-    width: 1fr;
-    height: 1fr;
-    background-color: rgb(98, 97, 97);
-}
-
-#box4 {
-    width: 1fr;
-    height: 1fr;
-    background-color: rgb(30, 172, 208);
-    font-size: 200px;
-}
-
-#box5 {
-    width: 1fr;
-    height: 1fr;
-    background-color: rgb(98, 97, 97);
-}
-
-#box6 {
-    width: 1fr;
-    height: 1fr;
-    background-color: rgb(30, 172, 208);
-}
-
-#box7 {
-    width: 1fr;
-    height: 1fr;
-    background-color: rgb(98, 97, 97);
-}
-
-#box8 {
-    width: 1fr;
-    height: 1fr;
-    background-color: rgb(30, 172, 208);
 }
