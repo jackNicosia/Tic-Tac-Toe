@@ -17,9 +17,6 @@ let player2 = createPlayer("Player 2", "O");
 const handleClick = function() {
   if (!this.innerHTML) {
     this.innerHTML = currentPlayer.symbol;
-    if (currentPlayer === player1) {
-      this.classList.add("player1-symbol");
-    }
     currentPlayer = currentPlayer === player1 ? player2 : player1; // Switch players
     updatePlayerTurnMessage(); // Update the player turn message
   }
@@ -91,6 +88,9 @@ function showGame(){
   const playerTurn = document.querySelector(".player-turn-div");
   playerTurn.style.display = "grid";
 
+  const footer = document.querySelector("footer");
+  footer.style.display = "flex";
+
   const introPage = document.querySelector(".intro-page");
   introPage.style.display = "none"; 
 }
@@ -107,7 +107,15 @@ var currentPlayer = player1;
 function updatePlayerTurnMessage() {
   const playerTurnMessage = document.querySelector(".player-turn-message");
   playerTurnMessage.innerHTML = `Player ${currentPlayer === player1 ? '1' : '2'}'s turn`;
+ 
+ // Set text color based on currentPlayer
+ if (currentPlayer === player1) {
+  playerTurnMessage.style.color = "white"; // Set the text color to white for Player 1
+} else {
+  playerTurnMessage.style.color = "black"; // Set the text color to black for Player 2
+  }
 }
+
 
 
 function resetGame() {

@@ -56,8 +56,12 @@ h1 {
     font-size: 18vh;
 }
 
-.player1-symbol {
+.player1-symbol .player-turn-message{
     color:white;
+}
+
+.player2-symbol .player-turn-message {
+    color:black;
 }
 
 #reset-button {
@@ -83,6 +87,27 @@ h1 {
 
 .player-turn-div {
     display:none;
+    grid-template-rows: 13vh 7vh;
+}
+
+.player-turn-message {
+    grid-row: 2;
+    font-size: 25px;
+    font-weight: bold;
+    color:white; 
+   
+}
+
+#player1-key {
+    color:white;
+}
+
+footer {
+    justify-content: space-between;
+    display:none;
+    font-size: 30px;
+    text-decoration: underline;
+    text-decoration-color: rgb(37, 253, 8);
 }
 
 
