@@ -106,3 +106,10 @@ footer {
     background-color: #CCC;
     margin-top: 10px;
 }
+
+#input-div {
+    display: block;
+   /* justify-content: space-around;
+    width: 100vw;
+    */
+}

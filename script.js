@@ -8,6 +8,7 @@ function createPlayer(name, symbol) {
   };
 }
 
+
 let player1 = createPlayer("Player 1", "X");
 let player2 = createPlayer("Player 2", "O");
 
@@ -120,6 +121,29 @@ placeSymbols.forEach(box => {
 
 var currentPlayer = player1;
 
+// Add an event listener to the input field for Player 1's name
+const player1NameInput = document.getElementById("player1-name");
+player1NameInput.addEventListener("change", function() {
+  player1.name = player1NameInput.value;
+  updatePlayerKeys();
+});
+
+// Add an event listener to the input field for Player 2's name
+const player2NameInput = document.getElementById("player2-name");
+player2NameInput.addEventListener("change", function() {
+  player2.name = player2NameInput.value;
+  updatePlayerKeys();
+});
+
+// Function to update the player keys (names and symbols)
+function updatePlayerKeys() {
+  const player1Key = document.getElementById("player1-key");
+  const player2Key = document.getElementById("player2-key");
+
+  player1Key.textContent = `${player1.name} = X`;
+  player2Key.textContent = `O = ${player2.name}`;
+}
+
 // Function to update the player turn message
 function updatePlayerTurnMessage() {
   const playerTurnMessage = document.querySelector(".player-turn-message");
@@ -198,3 +222,4 @@ function displayTie() {
     box.removeEventListener("click", handleClick);
   });
 }
+
