@@ -1,6 +1,3 @@
-// create gameboard and display controller with modules
-// create players with factories 
-
 function createPlayer(name, symbol) {
   return {
     name: name,
@@ -14,18 +11,35 @@ function createPlayer(name, symbol) {
 let player1 = createPlayer("Player 1", "X");
 let player2 = createPlayer("Player 2", "O");
 
-const handleClick = function() {
+const handleClick = function () {
   if (!this.innerHTML) {
     this.innerHTML = currentPlayer.symbol;
-    if (currentPlayer === player1) {
-      this.classList.add("player1-symbol");
-    }
-    currentPlayer = currentPlayer === player1 ? player2 : player1; // Switch players
-    updatePlayerTurnMessage(); // Update the player turn message
-  }
-}
 
-var gameboard = (function () {
+
+    if (currentPlayer === player2) {
+      this.classList.add("player2-symbol");
+    }
+    // Check for win condition after each move
+    if (checkWin()) {
+      displayWinner(currentPlayer);
+      return;
+    }
+    if (checkTie()) {
+      displayTie();
+      return;
+    }
+
+    // Switch players
+    currentPlayer = currentPlayer === player1 ? player2 : player1;
+
+    // Update the player turn message
+    updatePlayerTurnMessage();
+  }
+
+  
+};
+
+const gameboard = (function () {
   'use strict';
   const box0 = document.createElement("div");
   box0.className = "blue-box";
@@ -49,22 +63,23 @@ var gameboard = (function () {
   resetButton.id = "reset-button";
   var playerTurn = document.createElement("p");
   playerTurn.className = "player-turn-message"; // Change class name to match the HTML
-  
+
   const boxArray = [box0, box1, box2, box3, box4, box5, box6, box7, box8];
-  
+
   const boxArrayContainer = document.querySelector(".boxArray");
-  
+
   // Append each box to the "boxArray" div
   boxArray.forEach(box => {
     boxArrayContainer.appendChild(box);
   });
+
   const resetButtonContainer = document.querySelector(".reset-button-container");
   const playerTurnDiv = document.querySelector(".player-turn-div");
   resetButtonContainer.appendChild(resetButton);
   playerTurnDiv.appendChild(playerTurn);
   resetButton.innerHTML = "Play Again!";
   playerTurn.innerHTML = `Player 1's turn`;
-  
+
   // Return the boxArray so it can be accessed outside the IIFE
   return {
     getBoxArray: function () {
@@ -75,13 +90,12 @@ var gameboard = (function () {
 
 // Now you can access the boxArray outside the IIFE
 const boxes = gameboard.getBoxArray();
-console.log(boxes); // Array of div elements (box0 to box8)
 
 //this is to hide and show parts of the page when play button is clicked
 const playButton = document.getElementById("play");
 playButton.addEventListener("click", showGame);
 
-function showGame(){
+function showGame() {
   const boxArrayElement = document.querySelector(".boxArray");
   boxArrayElement.style.display = "grid";
 
@@ -95,7 +109,7 @@ function showGame(){
   footer.style.display = "flex";
 
   const introPage = document.querySelector(".intro-page");
-  introPage.style.display = "none"; 
+  introPage.style.display = "none";
 }
 
 // Add event listeners to all boxes with the class "box"
@@ -110,27 +124,77 @@ var currentPlayer = player1;
 function updatePlayerTurnMessage() {
   const playerTurnMessage = document.querySelector(".player-turn-message");
   playerTurnMessage.innerHTML = `Player ${currentPlayer === player1 ? '1' : '2'}'s turn`;
- 
+
   // Toggle the player1-symbol class to switch the text color
-  playerTurnMessage.classList.toggle("player1-symbol", currentPlayer === player1);
+  playerTurnMessage.classList.toggle("player2-symbol", currentPlayer === player2);
 }
 
+function checkWin() {
+  const winPatterns = [
+    [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
+    [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columns
+    [0, 4, 8], [2, 4, 6], // Diagonals
+  ];
+
+  for (const pattern of winPatterns) {
+    const [a, b, c] = pattern;
+    if (
+      boxes[a].innerHTML &&
+      boxes[a].innerHTML === boxes[b].innerHTML &&
+      boxes[a].innerHTML === boxes[c].innerHTML
+    ) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
+function displayWinner(player) {
+  const playerTurnMessage = document.querySelector(".player-turn-message");
+  playerTurnMessage.innerHTML = `Player ${player === player1 ? '1' : '2'} wins!`;
+
+  // Remove click event listeners from the boxes to prevent further moves
+  placeSymbols.forEach(box => {
+    box.removeEventListener("click", handleClick);
+  });
+}
 
 function resetGame() {
   boxes.forEach(box => {
     box.innerHTML = '';
-    box.classList.remove("player1-symbol"); // Remove the player1-symbol class
+    box.classList.remove("player2-symbol");
   });
 
-  updatePlayerTurnMessage(); // Update the player turn message
-  
+  updatePlayerTurnMessage();
+
+  // Add the click event listener again
   placeSymbols.forEach(box => {
-    box.addEventListener("click", handleClick); // Add the click event listener again
+    box.addEventListener("click", handleClick);
   });
 }
 
 const resetButton = document.querySelector("#reset-button");
-
-resetButton.addEventListener("click", function() {
+resetButton.addEventListener("click", function () {
   resetGame();
 });
+
+
+function checkTie() {
+  for (const box of boxes) {
+    if (!box.innerHTML) {
+      return false; // If an empty box is found, game is not a tie
+    }
+  }
+  return true; // All boxes are filled, game is a tie
+}
+
+function displayTie() {
+  const playerTurnMessage = document.querySelector(".player-turn-message");
+  playerTurnMessage.innerHTML = "Tie!";
+
+  // Remove click event listeners from the boxes to prevent further moves
+  placeSymbols.forEach(box => {
+    box.removeEventListener("click", handleClick);
+  });
+}
