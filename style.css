@@ -108,6 +108,7 @@ h1 {
     grid-row: 2;
     font-size: 25px;
     font-weight: bold;
+    font-family: tektur;
    
 }
 
@@ -123,6 +124,7 @@ footer {
     text-decoration-color: rgb(37, 253, 8);
     background-color: #CCC;
     margin-top: 10px;
+    font-family: tektur;
 }
 
 #input-div {
