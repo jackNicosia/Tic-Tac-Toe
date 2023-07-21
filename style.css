@@ -58,19 +58,20 @@ h1 {
 
 
 
-.blue-box {
-    width: 1fr;
-    height: 1fr;
+.blue-box { 
     background-color: rgb(30, 172, 208);
     font-size: 18vh;
-    
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 
 .gray-box {
-    width: 1fr;
-    height: 1fr;
     background-color: rgb(98, 97, 97);
     font-size: 18vh;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 
 .player2-symbol {
@@ -89,6 +90,7 @@ h1 {
     font-weight: bold;
     margin-top: 10%;
     font-family: noto;
+    white-space: nowrap;
 }
 
 
@@ -102,14 +104,18 @@ h1 {
 .player-turn-div {
     display:none;
     grid-template-rows: 13vh 7vh;
+
 }
 
 .player-turn-message {
     grid-row: 2;
-    font-size: 25px;
+    font-size: 3vh;
     font-weight: bold;
     font-family: tektur;
-   
+    display: flex;
+    justify-self: center;
+    align-self: end;
+    margin: 1vh;
 }
 
 #player2-key {
@@ -119,7 +125,7 @@ h1 {
 footer {
     justify-content: space-between;
     display:none;
-    font-size: 30px;
+    font-size: 4vh;
     text-decoration: underline;
     text-decoration-color: rgb(37, 253, 8);
     background-color: #CCC;
@@ -152,5 +158,10 @@ footer {
 
 label {
     font-family: tektur;
-    font-size: 20px;
+    font-size: 2vw;
+}
+
+.intro-page {
+    display: grid;
+    justify-items: center;
 }
