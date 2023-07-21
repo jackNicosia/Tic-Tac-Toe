@@ -73,13 +73,15 @@ const gameboard = (function () {
   boxArray.forEach(box => {
     boxArrayContainer.appendChild(box);
   });
+  
 
   const resetButtonContainer = document.querySelector(".reset-button-container");
   const playerTurnDiv = document.querySelector(".player-turn-div");
   resetButtonContainer.appendChild(resetButton);
   playerTurnDiv.appendChild(playerTurn);
   resetButton.innerHTML = "Play Again!";
-  playerTurn.innerHTML = `Player 1's turn`;
+  playerTurn.innerHTML = `${player1.name}'s tsurn`;
+  updatePlayerTurnMessage();
 
   // Return the boxArray so it can be accessed outside the IIFE
   return {
@@ -111,6 +113,11 @@ function showGame() {
 
   const introPage = document.querySelector(".intro-page");
   introPage.style.display = "none";
+
+  player1NameInput.dispatchEvent(new Event('input'));
+  player2NameInput.dispatchEvent(new Event('input'));
+
+  updatePlayerTurnMessage();
 }
 
 // Add event listeners to all boxes with the class "box"
@@ -123,14 +130,14 @@ var currentPlayer = player1;
 
 // Add an event listener to the input field for Player 1's name
 const player1NameInput = document.getElementById("player1-name");
-player1NameInput.addEventListener("change", function() {
+player1NameInput.addEventListener("input", function() {
   player1.name = player1NameInput.value;
   updatePlayerKeys();
 });
 
 // Add an event listener to the input field for Player 2's name
 const player2NameInput = document.getElementById("player2-name");
-player2NameInput.addEventListener("change", function() {
+player2NameInput.addEventListener("input", function() {
   player2.name = player2NameInput.value;
   updatePlayerKeys();
 });
@@ -142,12 +149,14 @@ function updatePlayerKeys() {
 
   player1Key.textContent = `${player1.name} = X`;
   player2Key.textContent = `O = ${player2.name}`;
+
+  updatePlayerTurnMessage();
 }
 
 // Function to update the player turn message
 function updatePlayerTurnMessage() {
   const playerTurnMessage = document.querySelector(".player-turn-message");
-  playerTurnMessage.innerHTML = `Player ${currentPlayer === player1 ? '1' : '2'}'s turn`;
+  playerTurnMessage.innerHTML = ` ${currentPlayer === player1 ? player1.name : player2.name}'s turn`;
 
   // Toggle the player1-symbol class to switch the text color
   playerTurnMessage.classList.toggle("player2-symbol", currentPlayer === player2);
@@ -176,7 +185,7 @@ function checkWin() {
 
 function displayWinner(player) {
   const playerTurnMessage = document.querySelector(".player-turn-message");
-  playerTurnMessage.innerHTML = `Player ${player === player1 ? '1' : '2'} wins!`;
+  playerTurnMessage.innerHTML = `${player === player1 ? player1.name : player2.name} wins!`;
 
   // Remove click event listeners from the boxes to prevent further moves
   placeSymbols.forEach(box => {
